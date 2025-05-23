@@ -1,34 +1,19 @@
 variable "aws_region" {
-  description = "AWS region"
-  type        = string
+  default = "us-east-1"
 }
 
 variable "rocky_linux_ami" {
   description = "Rocky Linux 9 AMI ID"
-  type        = string
 }
 
 variable "key_name" {
-  description = "SSH key pair name"
-  type        = string
+  description = "Name of the EC2 key pair"
 }
 
 variable "subnet_id" {
-  description = "Subnet ID to launch EC2"
-  type        = string
+  description = "Subnet ID where the instance will be deployed"
 }
 
 variable "security_group_id" {
-  description = "Security Group ID with SSH access"
-  type        = string
-}
-
-variable "aqua_gateway" {
-  description = "Aqua Gateway URL (host:port)"
-  type        = string
-}
-
-variable "aqua_enforcer_token" {
-  description = "Enforcer token from Aqua Console"
-  type        = string
+  description = "Security Group ID for the instance"
 }
