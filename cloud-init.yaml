@@ -1,23 +1,12 @@
 #cloud-config
 package_update: true
-package_upgrade: true
 packages:
-  - qemu-kvm
-  - libvirt
-  - virt-install
-  - bridge-utils
   - wget
-  - unzip
+  - curl
 
 runcmd:
-  - systemctl enable --now libvirtd
-  - usermod -aG libvirt ec2-user
-  - |
-    curl -L -o aqua-enforcer.zip "https://install.aquasec.com/releases/enforcer/v6.8.3/enforcer.zip"
-    unzip aqua-enforcer.zip -d /opt/aqua
-    chmod +x /opt/aqua/install.sh
-    /opt/aqua/install.sh \
-      --token "${aqua_enforcer_token}" \
-      --gateway "${aqua_gateway}" \
-      --host-type "linux" \
-      --no-container-runtime
+  - sudo dnf install -y wget curl
+  - cd /opt
+  - sudo wget https://get.aquasec.com/aquactl/stable/aquactl
+  - sudo chmod +x aquactl
+  - sudo ./aquactl deploy vm-enforcer --version 2022.4 --token fe69ae4 --gateway 1918-gw.cloud.aquasec.com:443
